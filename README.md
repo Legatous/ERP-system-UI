@@ -1,4 +1,4 @@
-# ERP-system-UI
+# Portal-system-UI
 js template for institutions?
 entry portals with different forms
 i will try to make tempalte for schools(that could be adapted to all kinds of institions)
