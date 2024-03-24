@@ -187,38 +187,32 @@
                             <h2>Keep in touch</h2>
                         </div> <!-- section title -->
                         <div class="main-form pt-45">
-                            <form id="contact-form" action="#" method="post" data-toggle="validator">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="singel-form form-group">
-                                            <input name="name" type="text" placeholder="Your name" data-error="Name is required." required="required">
-                                            <div class="help-block with-errors"></div>
-                                        </div> <!-- singel form -->
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="singel-form form-group">
-                                            <input name="email" type="email" placeholder="Email" data-error="Valid email is required." required="required">
-                                            <div class="help-block with-errors"></div>
-                                        </div> <!-- singel form -->
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="singel-form form-group">
-                                            <input name="subject" type="text" placeholder="Subject" data-error="Subject is required." required="required">
-                                            <div class="help-block with-errors"></div>
-                                        </div> <!-- singel form --> 
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="singel-form form-group">
-                                            <textarea name="messege" placeholder="Messege" data-error="Please,leave us a message." required="required"></textarea>
-                                            <div class="help-block with-errors"></div>
-                                        </div> <!-- singel form -->
-                                    </div>
-                                    <p class="form-message"></p>
-                                    <div class="col-md-12">
-                                        <div class="singel-form">
-                                            <form action="https://formspree.io/f/xgegwdnw" method="POST">
-                                            <button type="submit" class="main-btn">Send</button>
-                                            </form>
+                           <form action="https://formspree.io/f/xgegwdnw" method="POST">
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+            <div class="validation"></div>
+        </div>
+        <div class="col-md-6 form-group mt-3 mt-md-0">
+            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:8" data-msg="Please enter at least 8 chars of subject" required>
+            <div class="validation"></div>
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" required>
+        <div class="validation"></div>
+    </div>
+    <div class="form-group mt-3">
+        <textarea class="form-control" name="message" rows="5" placeholder="Message" data-rule="required" data-msg="Please write something for us" required></textarea>
+        <div class="validation"></div>
+    </div>
+    <div class="my-3">
+        <div id="errormessage" class="error-message"></div>
+        <div id="sendmessage" class="sent-message">Your message has been sent. Thank you!</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Send Message</button>
+</form>
+
                                         </div> <!-- singel form -->
                                     </div> 
                                 </div> <!-- row -->
