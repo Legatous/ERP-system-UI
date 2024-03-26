@@ -181,7 +181,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
-                    <div class="contact-from mt-30">
+                    <div class="contact-from">
                         <div class="section-title">
                             <h5>Contact Us</h5>
                             <h2>Keep in touch</h2>
@@ -210,7 +210,26 @@
                             <div id="errormessage" class="error-message"></div>
                             <div id="sendmessage" class="sent-message">Your message has been sent. Thank you!</div>
                         </div>
-                             <input type="submit" value="Send message">  
+                             <input type="submit" class="custom-button" value="Send">  
+                             <style>
+                                /* Define the default button style */
+                                .custom-button {
+                                    background-color: #ffc600;
+                                    color: #07294d; /* Color of the text */
+                                    border: none;
+                                    padding: 10px 20px;
+                                    cursor: pointer;
+                                    border-radius: 5px;
+                                    transition: background-color 0.3s, color 0.3s; /* Transition effect */
+                                }
+                            
+                                /* Change button background color on hover */
+                                .custom-button:hover {
+                                    background-color: #07294d;
+                                    color: #ffc600; /* Color of the text on hover */
+                                }
+                            
+                            </style>
                               </form>
                                         </div> <!-- singel form -->
                                     </div> 
@@ -219,44 +238,7 @@
                         </div> <!-- main form -->
                     </div> <!--  contact from -->
                 </div>
-                <div class="col-lg-5">
-                    <div class="contact-address mt-30">
-                        <ul>
-                            <li>
-                                <div class="singel-address">
-                                    <div class="icon">
-                                        <i class="fa fa-home"></i>
-                                    </div>
-                                    <div class="cont">
-                                        <p>1234 Random street, Random city</p>
-                                    </div>
-                                </div> <!-- singel address -->
-                            </li>
-                            <li>
-                                <div class="singel-address">
-                                    <div class="icon">
-                                        <i class="fa fa-phone"></i>
-                                    </div>
-                                    <div class="cont">
-                                        <p>+3 123 456 789</p>
-                                    </div>
-                                </div> <!-- singel address -->
-                            </li>
-                            <li>
-                                <div class="singel-address">
-                                    <div class="icon">
-                                        <i class="fa fa-envelope-o"></i>
-                                    </div>
-                                    <div class="cont">
-                                        <p>info@yourmail.com</p>
-                                    </div>
-                                </div> <!-- singel address -->
-                            </li>
-                        </ul>
-                    </div> <!-- contact address -->
-                    <div class="map mt-30">
-                        <div id="contact-map"></div>
-                    </div> <!-- map -->
+                
                 </div>
             </div> <!-- row -->
         </div> <!-- container -->
