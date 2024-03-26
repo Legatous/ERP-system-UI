@@ -3652,7 +3652,7 @@ p {
 }
 .contact-from .main-form .singel-form input,
 .contact-from .main-form .singel-form textarea{
-    width: 100%;
+    width: 50%;
     height: 50px;
     padding: 0 20px;
     border: 1px solid #a1a1a1;
