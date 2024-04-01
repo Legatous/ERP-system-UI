@@ -1,69 +1,65 @@
 <?php
+$phpPath = "C:\\xampp\\php\\php.exe"; // Update this with the path to your PHP executable
+
+// Set the correct PHP executable path
+ini_set('php_path', $phpPath);
 
 session_start();
 
-// Check if user is logged in
-if (isset($_SESSION['user'])) {
-    // Redirect logged-in users to their respective dashboards
-    if ($_SESSION['user']['role'] === 'faculty') {
-        header('Location: faculty_dashboard.php');
-        exit();
-    } elseif ($_SESSION['user']['role'] === 'teacher') {
-        header('Location: teacher_dashboard.php');
-        exit();
-    } else {
-        header('Location: student_dashboard.php');
-        exit();
-    }
+// Database connection
+$servername = "localhost"; // Change this if your database is on a different server
+$username = "your_username"; // Change this to your MySQL username
+$password = "your_password"; // Change this to your MySQL password
+$dbname = "database"; // Change this to the name of your database
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Login Logic
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sample user data (replace with database)
-    $users = [
-        ['id' => 1, 'username' => 'teacher123', 'password' => 'password', 'role' => 'teacher'],
-        ['id' => 2, 'username' => 'student123', 'password' => 'password', 'role' => 'student'], // Example student ID
-        ['id' => 3, 'username' => 'faculty123', 'password' => 'password', 'role' => 'faculty']
-    ];
-
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $loggedIn = false;
+    // Validate credentials
+    $user = validateUser($conn, $username, $password);
 
-    foreach ($users as $user) {
-        if ($user['username'] === $username && $user['password'] === $password) {
-            $_SESSION['user'] = $user;
-            $loggedIn = true;
-            break;
-        }
-    }
-
-    if ($loggedIn) {
-        // Redirect to the appropriate dashboard based on user role
-        if ($_SESSION['user']['role'] === 'faculty') {
-            header('Location: faculty_dashboard.php');
-            exit();
-        } elseif ($_SESSION['user']['role'] === 'teacher') {
-            header('Location: teacher_dashboard.php');
-            exit();
-        } else {
-            header('Location: student_dashboard.php');
-            exit();
+    if ($user) {
+        // Set session data for the authenticated user
+        $_SESSION['user'] = $user;
+        // Redirect to the appropriate dashboard based on the user's role
+        switch ($user['role']) {
+            case 'teacher':
+                header('Location: teacher_dashboard.php');
+                exit();
+                break;
+            case 'student':
+                header('Location: student_dashboard.php');
+                exit();
+                break;
+            case 'faculty':
+                header('Location: faculty_dashboard.php');
+                exit();
+                break;
         }
     } else {
         $message = 'Invalid username or password';
     }
 }
 
-// Logout Logic
-if (isset($_GET['logout'])) {
-    session_unset();
-    session_destroy();
-    header('Location: index.html');
-    exit();
-}
+function validateUser($conn, $username, $password) {
+    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+    $result = $conn->query($sql);
 
+    if ($result->num_rows == 1) {
+        return $result->fetch_assoc();
+    } else {
+        return false;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +67,7 @@ if (isset($_GET['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudent</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -79,7 +75,7 @@ if (isset($_GET['logout'])) {
         <h2>Login</h2>
         <form id="loginForm" method="POST">
             <div>
-                <label for="username">Student ID:</label>
+                <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
             </div>
             <div>
